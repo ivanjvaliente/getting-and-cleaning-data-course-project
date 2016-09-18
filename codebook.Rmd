@@ -1,0 +1,67 @@
+---
+title: "CodeBook"
+autor: "ivan valiente"
+---
+# Getting and Cleaning Data Course Project
+
+## Introduction
+This file contains a description about the initial data, the variables, and the transformation performed on the initial data set in order to obtain a file I called « tidy_data.txt » that contains a tidy data set in agreement with the instructions provided in the course project for the Johns Hopkins Getting and Cleaning Data course.
+
+## Source data
+Full information about the data used in this project could be found at the following url:
+http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones 
+
+The file with the data for the project is located at the following url:
+https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
+
+## Data Set Information (extract from readme.txt file provided in the zip file)
+
+
+The experiments have been carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, we captured 3-axial linear acceleration and 3-axial angular velocity at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. The obtained dataset has been randomly partitioned into two sets, where 70% of the volunteers was selected for generating the training data and 30% the test data. 
+
+The sensor signals (accelerometer and gyroscope) were pre-processed by applying noise filters and then sampled in fixed-width sliding windows of 2.56 sec and 50% overlap (128 readings/window). The sensor acceleration signal, which has gravitational and body motion components, was separated using a Butterworth low-pass filter into body acceleration and gravity. The gravitational force is assumed to have only low frequency components, therefore a filter with 0.3 Hz cutoff frequency was used. From each window, a vector of features was obtained by calculating variables from the time and frequency domain.
+
+For each record in the dataset it is provided:
+
+- Triaxial acceleration from the accelerometer (total acceleration) and the estimated body acceleration.
+- Triaxial Angular velocity from the gyroscope.
+- A 561-feature vector with time and frequency domain variables.
+- Its activity label.
+- An identifier of the subject who carried out the experiment.
+
+## Step 1: Merges the training and the test sets to create one data set.
+Download and unzip the data file..
+For the purpose of this project the data has been extracted from the following list of files in "UCI HAR Dataset" folder:
+- "features_info.txt": Shows information about the variables used on the feature vector.
+- "features.txt": List of all features.
+- "activity_labels.txt": Links the class labels with their activity name.
+- "train/X_train.txt": Training set.
+- "train/y_train.txt": Training labels.
+- "train/subject_train.txt": Training subjects.
+- "test/X_test.txt": Test set.
+- "test/y_test.txt": Test labels.
+- "test/subject_test.txt": Test subjects.
+In this step, the rows of training (set, labels, and subject files) are merged with their respective test files.
+Then the list of features are added as names of the merged training-test set
+Finaly the colons of the subject, activity_labels and variables_set are concatenated in a single data frame.
+
+## Step 2: Extracts only the measurements on the mean and standard deviation for each measurement
+
+In this section a new data frame is created fom a selection of the variable names that match with "mean" or "std" character chains.
+
+## Step 3: Uses descriptive activity names to name the activities in the data set
+
+In this step, the number (labels) of the activities are replaced by their correspondent activity names that are contained in the file "activity_labels.txt"
+
+## Step 4: Appropriately labels the data set with descriptive variable names
+
+In this step the initial variable names are replaced by more explicit variable names as follows:
+- the prefix "f" is replaced by "frequency"
+- the ptefix "t" is replaced by "time"
+- the "Acc" character chain is replaced by "Acceleration"
+- the "Gyro" character chain is replaced by "AngularVelocity"
+- and finally the "Mag" character chain is replaced by "Magnitude"
+
+## Step 5: From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject
+
+In this step is produced the final data set that is the average of each variable   by subject and by activity. I called it « tidy_data.txt »
